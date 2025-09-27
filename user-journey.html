@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Journey Mapping - CEO Strategy Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 CEO Strategy Hub</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="user-journey.html">User Journey</a>
+                <a href="architecture.html">Architecture</a>
+                <a href="ai-tools.html">AI Tools</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="roadmap.html">Roadmap</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>🎯 User Journey Mapping</h1>
+        <p>Analyze and optimize user workflows with data-driven insights</p>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid">
+                <div class="content-card">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=200&fit=crop" alt="Current Workflow" />
+                    <h3>❌ Current Broken Workflow</h3>
+                    <div class="workflow-steps">
+                        <div class="step-item">1. User imports large dataset → hits 1000-row limit</div>
+                        <div class="step-item">2. Gets generic error message "upgrade to process more data"</div>
+                        <div class="step-item">3. Clicks upgrade → sees pricing page with no context</div>
+                        <div class="step-item">4. Abandons because value isn't clear (78% drop-off)</div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop" alt="Ideal Workflow" />
+                    <h3>✅ Ideal Future Workflow</h3>
+                    <div class="workflow-steps">
+                        <div class="step-item">1. User imports large dataset → hits 1000-row limit</div>
+                        <div class="step-item">2. Smart modal appears with personalized message</div>
+                        <div class="step-item">3. Shows preview of their data with premium features</div>
+                        <div class="step-item">4. One-click upgrade with context preserved (45% conversion)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🎮 Interactive Modal Demo</h3>
+                <p>Experience the difference between current and ideal approaches</p>
+                <button class="demo-button" onclick="showModal('current')">Show Current Modal</button>
+                <button class="demo-button" onclick="showModal('ideal')">Show Ideal Modal</button>
+            </div>
+
+            <div class="chart-container">
+                <h3>📊 User Journey Drop-off Analysis</h3>
+                <canvas id="journeyChart" width="400" height="200"></canvas>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>💡 Key Research Insights</h3>
+                    <div class="insight-item">
+                        <strong>Exit Survey Finding:</strong> "I didn't know premium included unlimited exports"
+                        <p>This reveals a critical awareness gap in our value communication</p>
+                    </div>
+                    <div class="insight-item">
+                        <strong>A/B Test Result:</strong> Contextual prompts convert 3x better than generic ones
+                        <p>Personalization and timing are crucial for conversion success</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>⚠️ Edge Cases & Considerations</h3>
+                    <div class="edge-case">
+                        <strong>Mobile Users:</strong> Different modal UX with simplified interface
+                    </div>
+                    <div class="edge-case">
+                        <strong>Ad Blocker Users:</strong> Fallback to inline prompts when modal is blocked
+                    </div>
+                    <div class="edge-case">
+                        <strong>Enterprise Users:</strong> Route to sales team instead of self-serve upgrade
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 CEO Strategy Hub. Empowering product leaders with AI-driven insights.</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%;">
+            <button onclick="closeModal()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.5em; cursor: pointer;">&times;</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize journey chart
+        const ctx = document.getElementById('journeyChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Start Import', 'Hit Limit', 'See Message', 'Click Upgrade', 'View Pricing', 'Complete Purchase'],
+                datasets: [{
+                    label: 'Current Journey (% remaining)',
+                    data: [100, 40, 32, 12, 8, 3],
+                    borderColor: '#ff6b6b',
+                    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Ideal Journey (% remaining)',
+                    data: [100, 40, 36, 25, 20, 15],
+                    borderColor: '#00d2d3',
+                    backgroundColor: 'rgba(0, 210, 211, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Percentage of Users Remaining'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'User Journey Drop-off Comparison'
+                    }
+                }
+            }
+        });
+
+        function showModal(type) {
+            const modal = document.getElementById('modal');
+            const content = document.getElementById('modalContent');
+            
+            if (type === 'current') {
+                content.innerHTML = `
+                    <h3 style="color: #ff6b6b; margin-bottom: 15px;">❌ Current Modal</h3>
+                    <p style="margin-bottom: 15px;">Generic message: "Upgrade to process more data"</p>
+                    <button style="padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer;">View Pricing</button>
+                `;
+            } else {
+                content.innerHTML = `
+                    <h3 style="color: #28a745; margin-bottom: 15px;">✅ Ideal Modal</h3>
+                    <p style="margin-bottom: 10px;"><strong>Process Your 2,847-Row Dataset</strong></p>
+                    <p style="margin-bottom: 15px;">Your dataset needs Premium to unlock:</p>
+                    <ul style="margin-bottom: 15px; padding-left: 20px;">
+                        <li>✅ Unlimited data processing</li>
+                        <li>✅ Advanced filtering for large files</li>
+                        <li>✅ Export in multiple formats</li>
+                    </ul>
+                    <button style="padding: 12px 24px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Upgrade to Premium - $29/month</button>
+                `;
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Close modal on outside click
+        document.getElementById('modal').onclick = function(e) {
+            if (e.target === this) closeModal();
+        }
+    </script>
+
+    <style>
+        .workflow-steps {
+            margin-top: 15px;
+        }
+        
+        .step-item {
+            padding: 10px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .insight-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f0f8ff;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .insight-item p {
+            margin-top: 8px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .edge-case {
+            margin: 10px 0;
+            padding: 12px;
+            background: #fff3cd;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+        }
+    </style>
+</body>
+</html>

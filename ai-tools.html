@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools - CEO Strategy Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 CEO Strategy Hub</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="user-journey.html">User Journey</a>
+                <a href="architecture.html">Architecture</a>
+                <a href="ai-tools.html">AI Tools</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="roadmap.html">Roadmap</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>🤖 AI-Powered Tools</h1>
+        <p>Leverage artificial intelligence to generate MVPs, create wireframes, and optimize strategy</p>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid">
+                <div class="content-card">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop" alt="AI MVP Generator" />
+                    <h3>🎯 AI MVP Generator</h3>
+                    <p>Generate comprehensive MVP specifications based on your product vision and market analysis.</p>
+                    <div class="ai-form">
+                        <label>Product Type:</label>
+                        <select id="productType" style="width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+                            <option>SaaS Platform</option>
+                            <option>Mobile App</option>
+                            <option>E-commerce</option>
+                            <option>Marketplace</option>
+                            <option>Analytics Tool</option>
+                        </select>
+                        
+                        <label>Target Users:</label>
+                        <input type="text" id="targetUsers" placeholder="e.g., Small business owners" style="width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+                        
+                        <label>Budget Range:</label>
+                        <select id="budget" style="width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+                            <option>$10K - $50K</option>
+                            <option>$50K - $100K</option>
+                            <option>$100K - $500K</option>
+                            <option>$500K+</option>
+                        </select>
+                        
+                        <button onclick="generateMVP()" class="demo-button" style="width: 100%; margin-top: 15px;">Generate MVP</button>
+                    </div>
+                    
+                    <div id="mvpResult" style="display: none; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                        <h4>🎯 AI-Generated MVP Recommendations:</h4>
+                        <div id="mvpContent"></div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop" alt="AI Wireframe Generator" />
+                    <h3>🎨 AI Wireframe Generator</h3>
+                    <p>Create intelligent wireframes and UI mockups based on best practices and user behavior data.</p>
+                    <div class="wireframe-demo">
+                        <label>Page Type:</label>
+                        <select id="pageType" style="width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+                            <option>Landing Page</option>
+                            <option>Dashboard</option>
+                            <option>User Profile</option>
+                            <option>Checkout Flow</option>
+                            <option>Settings Page</option>
+                        </select>
+                        
+                        <button onclick="generateWireframe()" class="demo-button" style="width: 100%; margin-top: 15px;">Generate Wireframe</button>
+                    </div>
+                    
+                    <div id="wireframeResult" style="display: none; margin-top: 20px;">
+                        <div style="border: 2px dashed #ddd; padding: 20px; text-align: center; background: #f9f9f9;">
+                            <div id="wireframeContent">
+                                <!-- Wireframe will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🤖 AI Strategy Assistant</h3>
+                <p>Chat with our AI to get personalized product strategy recommendations</p>
+                <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; min-height: 300px; border: 1px solid #ddd;">
+                    <div id="chatMessages" style="height: 200px; overflow-y: auto; margin-bottom: 15px;">
+                        <div style="margin: 10px 0; padding: 10px; background: #e3f2fd; border-radius: 5px;">
+                            <strong>AI Assistant:</strong> Hello! I'm here to help you optimize your product strategy. What would you like to discuss today?
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="userInput" placeholder="Ask me about product strategy, market analysis, or feature prioritization..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        <button onclick="sendMessage()" class="demo-button">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop" alt="Market Analysis" />
+                    <h3>📈 AI Market Analysis</h3>
+                    <p>Get comprehensive market insights and competitive analysis powered by AI.</p>
+                    <button onclick="runMarketAnalysis()" class="demo-button">Run Analysis</button>
+                    <div id="marketResult" style="display: none; margin-top: 15px; padding: 15px; background: #f0f8ff; border-radius: 8px;">
+                        <h4>Market Insights:</h4>
+                        <ul id="marketInsights"></ul>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop" alt="Feature Prioritization" />
+                    <h3>🎯 AI Feature Prioritization</h3>
+                    <p>Automatically prioritize features based on user impact, development effort, and business value.</p>
+                    <button onclick="prioritizeFeatures()" class="demo-button">Prioritize Features</button>
+                    <div id="priorityResult" style="display: none; margin-top: 15px;">
+                        <div id="priorityMatrix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 CEO Strategy Hub. Empowering product leaders with AI-driven insights.</p>
+        </div>
+    </footer>
+
+    <script>
+        function generateMVP() {
+            const productType = document.getElementById('productType').value;
+            const targetUsers = document.getElementById('targetUsers').value;
+            const budget = document.getElementById('budget').value;
+            
+            const mvpTemplates = {
+                'SaaS Platform': {
+                    features: ['User Authentication', 'Dashboard', 'Core Analytics', 'Basic Reporting', 'User Management'],
+                    timeline: '3-4 months',
+                    team: '3-5 developers'
+                },
+                'Mobile App': {
+                    features: ['User Onboarding', 'Core Functionality', 'Push Notifications', 'User Profile', 'Basic Analytics'],
+                    timeline: '2-3 months',
+                    team: '2-4 developers'
+                },
+                'E-commerce': {
+                    features: ['Product Catalog', 'Shopping Cart', 'Payment Integration', 'User Accounts', 'Order Management'],
+                    timeline: '4-6 months',
+                    team: '4-6 developers'
+                }
+            };
+            
+            const template = mvpTemplates[productType] || mvpTemplates['SaaS Platform'];
+            
+            document.getElementById('mvpContent').innerHTML = `
+                <div style="margin: 15px 0;">
+                    <strong>Target Users:</strong> ${targetUsers || 'Not specified'}
+                </div>
+                <div style="margin: 15px 0;">
+                    <strong>Estimated Timeline:</strong> ${template.timeline}
+                </div>
+                <div style="margin: 15px 0;">
+                    <strong>Recommended Team Size:</strong> ${template.team}
+                </div>
+                <div style="margin: 15px 0;">
+                    <strong>Core Features:</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        ${template.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+                <div style="margin: 15px 0;">
+                    <strong>Budget Range:</strong> ${budget}
+                </div>
+            `;
+            
+            document.getElementById('mvpResult').style.display = 'block';
+        }
+
+        function generateWireframe() {
+            const pageType = document.getElementById('pageType').value;
+            
+            const wireframes = {
+                'Landing Page': `
+                    <div style="border: 1px solid #ccc; margin: 5px 0; padding: 10px; background: #f0f0f0;">Header / Navigation</div>
+                    <div style="border: 1px solid #ccc; margin: 5px 0; padding: 20px; background: #e0e0e0;">Hero Section</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 5px 0;">
+                        <div style="border: 1px solid #ccc; padding: 15px; background: #f0f0f0;">Feature 1</div>
+                        <div style="border: 1px solid #ccc; padding: 15px; background: #f0f0f0;">Feature 2</div>
+                        <div style="border: 1px solid #ccc; padding: 15px; background: #f0f0f0;">Feature 3</div>
+                    </div>
+                    <div style="border: 1px solid #ccc; margin: 5px 0; padding: 10px; background: #d0d0d0;">Footer</div>
+                `,
+                'Dashboard': `
+                    <div style="border: 1px solid #ccc; margin: 5px 0; padding: 10px; background: #f0f0f0;">Top Navigation</div>
+                    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px;">
+                        <div style="border: 1px solid #ccc; padding: 15px; background: #e0e0e0;">Sidebar Menu</div>
+                        <div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                                <div style="border: 1px solid #ccc; padding: 15px; background: #f0f0f0;">KPI Card 1</div>
+                                <div style="border: 1px solid #ccc; padding: 15px; background: #f0f0f0;">KPI Card 2</div>
+                                <div style="border: 1px solid #ccc; padding: 15px; background: #f0f0f0;">KPI Card 3</div>
+                            </div>
+                            <div style="border: 1px solid #ccc; padding: 20px; background: #f8f8f8;">Main Chart Area</div>
+                        </div>
+                    </div>
+                `
+            };
+            
+            document.getElementById('wireframeContent').innerHTML = wireframes[pageType] || wireframes['Landing Page'];
+            document.getElementById('wireframeResult').style.display = 'block';
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const messages = document.getElementById('chatMessages');
+            
+            if (input.value.trim()) {
+                messages.innerHTML += `
+                    <div style="margin: 10px 0; padding: 10px; background: #fff; border-radius: 5px; text-align: right; border: 1px solid #ddd;">
+                        <strong>You:</strong> ${input.value}
+                    </div>
+                `;
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const responses = [
+                        "Based on your query, I recommend focusing on user retention metrics and implementing a progressive onboarding flow.",
+                        "Consider implementing a freemium model - our analysis shows 67% higher conversion potential for your market segment.",
+                        "Your user engagement data suggests prioritizing mobile experience - 73% of your users access via mobile devices.",
+                        "I recommend A/B testing your current CTA buttons - blue variants typically perform 23% better in your industry."
+                    ];
+                    const response = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    messages.innerHTML += `
+                        <div style="margin: 10px 0; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                            <strong>AI Assistant:</strong> ${response}
+                        </div>
+                    `;
+                    messages.scrollTop = messages.scrollHeight;
+                }, 1000);
+                
+                input.value = '';
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }
+
+        function runMarketAnalysis() {
+            const insights = [
+                "Market size: $2.4B with 15% YoY growth",
+                "Top 3 competitors control 45% market share",
+                "Mobile-first approach shows 34% higher engagement",
+                "Freemium model adoption rate: 67% in your segment",
+                "Average customer acquisition cost: $89"
+            ];
+            
+            const list = document.getElementById('marketInsights');
+            list.innerHTML = insights.map(insight => `<li>${insight}</li>`).join('');
+            document.getElementById('marketResult').style.display = 'block';
+        }
+
+        function prioritizeFeatures() {
+            const features = [
+                { name: 'User Authentication', impact: 'High', effort: 'Medium', priority: 'P0' },
+                { name: 'Advanced Analytics', impact: 'High', effort: 'High', priority: 'P1' },
+                { name: 'Mobile App', impact: 'Medium', effort: 'High', priority: 'P2' },
+                { name: 'API Integration', impact: 'Medium', effort: 'Medium', priority: 'P1' },
+                { name: 'Dark Mode', impact: 'Low', effort: 'Low', priority: 'P3' }
+            ];
+            
+            const matrix = features.map(feature => `
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 10px; padding: 10px; margin: 5px 0; background: #f8f9fa; border-radius: 5px; align-items: center;">
+                    <div><strong>${feature.name}</strong></div>
+                    <div>Impact: ${feature.impact}</div>
+                    <div>Effort: ${feature.effort}</div>
+                    <div style="background: ${feature.priority === 'P0' ? '#ff6b6b' : feature.priority === 'P1' ? '#ffa500' : '#96ceb4'}; color: white; padding: 5px; border-radius: 3px; text-align: center;">${feature.priority}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('priorityMatrix').innerHTML = `
+                <h4>Feature Priority Matrix:</h4>
+                <div style="margin-top: 15px;">
+                    ${matrix}
+                </div>
+            `;
+            document.getElementById('priorityResult').style.display = 'block';
+        }
+
+        // Allow Enter key to send messages
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
