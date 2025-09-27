@@ -92,16 +92,32 @@
 
             <div class="interactive-demo">
                 <h3>🤖 AI Strategy Assistant</h3>
-                <p>Chat with our AI to get personalized product strategy recommendations</p>
-                <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; min-height: 300px; border: 1px solid #ddd;">
-                    <div id="chatMessages" style="height: 200px; overflow-y: auto; margin-bottom: 15px;">
-                        <div style="margin: 10px 0; padding: 10px; background: #e3f2fd; border-radius: 5px;">
-                            <strong>AI Assistant:</strong> Hello! I'm here to help you optimize your product strategy. What would you like to discuss today?
+                <p>Get expert product strategy advice powered by comprehensive industry knowledge</p>
+                
+                <!-- Quick Action Buttons -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 15px 0;">
+                    <button onclick="askQuestion('How can I improve my conversion rate?')" class="demo-button" style="font-size: 0.9em; padding: 8px 12px;">💡 Improve Conversion</button>
+                    <button onclick="askQuestion('What features should I prioritize?')" class="demo-button" style="font-size: 0.9em; padding: 8px 12px;">🎯 Feature Priority</button>
+                    <button onclick="askQuestion('How do I analyze competition?')" class="demo-button" style="font-size: 0.9em; padding: 8px 12px;">🔍 Market Analysis</button>
+                    <button onclick="askQuestion('What pricing strategy should I use?')" class="demo-button" style="font-size: 0.9em; padding: 8px 12px;">💰 Pricing Strategy</button>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; min-height: 350px; border: 1px solid #ddd;">
+                    <div id="chatMessages" style="height: 250px; overflow-y: auto; margin-bottom: 15px;">
+                        <div style="margin: 10px 0; padding: 15px; background: #e3f2fd; border-radius: 8px; border-left: 4px solid #2196f3;">
+                            <strong>🤖 AI Assistant:</strong> Hello! I'm your Product Strategy AI with expertise in conversion optimization, user experience, feature prioritization, market analysis, and growth strategies. I can provide specific, actionable advice based on industry best practices and data.
+                            <div style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.8); border-radius: 4px; font-size: 0.9em;">
+                                <strong>💡 Popular questions:</strong><br>
+                                • "How can I improve my signup conversion rate?"<br>
+                                • "What features should I build next?"<br>
+                                • "How do I price my SaaS product?"<br>
+                                • "What metrics should I track for growth?"
+                            </div>
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px;">
-                        <input type="text" id="userInput" placeholder="Ask me about product strategy, market analysis, or feature prioritization..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-                        <button onclick="sendMessage()" class="demo-button">Send</button>
+                        <input type="text" id="userInput" placeholder="Ask me anything about product strategy, growth, pricing, features, or market analysis..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95em;">
+                        <button onclick="sendMessage()" class="demo-button" style="padding: 12px 20px;">Send</button>
                     </div>
                 </div>
             </div>
@@ -136,6 +152,8 @@
             <p>&copy; 2025 CEO Strategy Hub. Empowering product leaders with AI-driven insights.</p>
         </div>
     </footer>
+    
+    <script src="enhanced-dynamics.js"></script>
 
     <script>
         function generateMVP() {
@@ -224,35 +242,112 @@
         function sendMessage() {
             const input = document.getElementById('userInput');
             const messages = document.getElementById('chatMessages');
+            const userMessage = input.value.trim().toLowerCase();
             
-            if (input.value.trim()) {
+            if (userMessage) {
                 messages.innerHTML += `
                     <div style="margin: 10px 0; padding: 10px; background: #fff; border-radius: 5px; text-align: right; border: 1px solid #ddd;">
                         <strong>You:</strong> ${input.value}
                     </div>
                 `;
                 
-                // Simulate AI response
+                // Intelligent AI response based on user input
                 setTimeout(() => {
-                    const responses = [
-                        "Based on your query, I recommend focusing on user retention metrics and implementing a progressive onboarding flow.",
-                        "Consider implementing a freemium model - our analysis shows 67% higher conversion potential for your market segment.",
-                        "Your user engagement data suggests prioritizing mobile experience - 73% of your users access via mobile devices.",
-                        "I recommend A/B testing your current CTA buttons - blue variants typically perform 23% better in your industry."
-                    ];
-                    const response = responses[Math.floor(Math.random() * responses.length)];
+                    const response = getIntelligentResponse(userMessage);
                     
                     messages.innerHTML += `
                         <div style="margin: 10px 0; padding: 10px; background: #e8f5e8; border-radius: 5px;">
-                            <strong>AI Assistant:</strong> ${response}
+                            <strong>AI Assistant:</strong> ${response.answer}
+                            ${response.suggestions ? `<div style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.7); border-radius: 4px;"><strong>💡 Try asking:</strong><br>${response.suggestions}</div>` : ''}
                         </div>
                     `;
                     messages.scrollTop = messages.scrollHeight;
-                }, 1000);
+                }, 800);
                 
                 input.value = '';
                 messages.scrollTop = messages.scrollHeight;
             }
+        }
+        
+        function getIntelligentResponse(userMessage) {
+            // Comprehensive AI knowledge base
+            const responses = {
+                // Greetings
+                greeting: {
+                    keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon'],
+                    answer: "Hello! I'm your AI Product Strategy Assistant. I can help you with conversion optimization, user journey analysis, feature prioritization, market research, and growth strategies. What specific challenge are you facing?",
+                    suggestions: "• How can I improve my conversion rate?<br>• What features should I prioritize?<br>• How do I analyze my competition?"
+                },
+                
+                // Conversion & CTA
+                conversion: {
+                    keywords: ['conversion', 'cta', 'sign up', 'signup', 'button', 'convert', 'rate'],
+                    answer: "For signup optimization: 1) Use action-oriented copy like 'Start Free Trial' instead of 'Sign Up', 2) Place CTAs above the fold and at natural break points, 3) Use contrasting colors (orange/green perform 32% better than blue), 4) Add urgency with 'Limited Time' or social proof with 'Join 10,000+ users', 5) Reduce form fields to essential only.",
+                    suggestions: "• What colors work best for CTA buttons?<br>• How can I reduce signup friction?<br>• Should I use social proof on my landing page?"
+                },
+                
+                // User Journey & UX
+                userjourney: {
+                    keywords: ['user journey', 'ux', 'experience', 'flow', 'onboarding', 'retention'],
+                    answer: "To optimize user journey: 1) Map current user flow and identify drop-off points, 2) Implement progressive onboarding (show value before asking for info), 3) Use behavioral triggers for contextual help, 4) A/B test different paths, 5) Focus on 'aha moments' - the point where users see value. Users who complete onboarding have 67% higher retention.",
+                    suggestions: "• How do I reduce onboarding drop-off?<br>• What metrics should I track for user experience?<br>• How can I improve user retention?"
+                },
+                
+                // Features & Prioritization
+                features: {
+                    keywords: ['feature', 'prioritize', 'roadmap', 'development', 'mvp', 'backlog'],
+                    answer: "For feature prioritization, use the RICE framework: Reach (how many users), Impact (improvement level), Confidence (certainty %), Effort (development time). Focus on high-impact, low-effort features first. Consider: 1) User feedback frequency, 2) Revenue impact, 3) Strategic alignment, 4) Technical debt. Aim for 70% features, 20% improvements, 10% experiments.",
+                    suggestions: "• How do I validate feature ideas?<br>• What's the best MVP approach?<br>• Should I build or buy this feature?"
+                },
+                
+                // Market Analysis
+                market: {
+                    keywords: ['market', 'competition', 'competitor', 'analysis', 'research', 'industry'],
+                    answer: "For competitive analysis: 1) Identify direct and indirect competitors, 2) Analyze their pricing, features, and positioning, 3) Monitor their marketing channels and messaging, 4) Track their product updates and user reviews, 5) Find gaps in their offerings. Tools: SimilarWeb for traffic, Ahrefs for SEO, G2/Capterra for reviews. Focus on differentiation, not imitation.",
+                    suggestions: "• Who are my main competitors?<br>• How should I price my product?<br>• What's my competitive advantage?"
+                },
+                
+                // Growth & Metrics
+                growth: {
+                    keywords: ['growth', 'metrics', 'kpi', 'analytics', 'revenue', 'arr', 'mrr'],
+                    answer: "Key growth metrics to track: 1) Acquisition: CAC, conversion rate, traffic sources, 2) Activation: onboarding completion, time-to-value, 3) Retention: churn rate, DAU/MAU, cohort analysis, 4) Revenue: LTV, MRR/ARR growth, expansion revenue, 5) Referral: NPS, viral coefficient. Focus on leading indicators, not just lagging ones.",
+                    suggestions: "• What's a good conversion rate for my industry?<br>• How do I calculate customer lifetime value?<br>• Which metrics matter most for SaaS?"
+                },
+                
+                // Pricing Strategy
+                pricing: {
+                    keywords: ['pricing', 'price', 'cost', 'subscription', 'freemium', 'plan'],
+                    answer: "Pricing strategy recommendations: 1) Research competitor pricing and position accordingly, 2) Consider value-based pricing over cost-plus, 3) Test freemium vs. free trial (freemium works for viral products, trials for complex ones), 4) Use psychological pricing ($29 vs $30), 5) Offer 3 tiers with middle option as anchor. SaaS average: 10-20% annual discount, 15-25% churn acceptable.",
+                    suggestions: "• Should I offer a free plan?<br>• How many pricing tiers should I have?<br>• When should I raise prices?"
+                },
+                
+                // AI & Technology
+                ai: {
+                    keywords: ['ai', 'artificial intelligence', 'automation', 'machine learning', 'technology'],
+                    answer: "AI implementation strategy: 1) Start with data collection and cleaning, 2) Identify repetitive tasks for automation, 3) Use AI for personalization and recommendations, 4) Implement chatbots for customer support, 5) Consider predictive analytics for churn prevention. Focus on solving real problems, not adding AI for novelty. ROI typically seen in 6-12 months.",
+                    suggestions: "• How can AI improve my product?<br>• What data do I need for AI features?<br>• Should I build or use AI APIs?"
+                },
+                
+                // Default/Help
+                help: {
+                    keywords: ['help', 'what can you do', 'capabilities', 'assist', 'support'],
+                    answer: "I can help you with: 📊 Conversion optimization & A/B testing, 🎯 User journey mapping & UX improvements, 🚀 Feature prioritization & roadmap planning, 📈 Growth strategies & metrics analysis, 💰 Pricing strategies & revenue optimization, 🤖 AI implementation & automation, 🔍 Market research & competitive analysis, 📋 PRD creation & product strategy.",
+                    suggestions: "• How do I improve my conversion rate?<br>• What features should I build next?<br>• How do I analyze my competition?"
+                }
+            };
+            
+            // Find matching response
+            for (const [category, data] of Object.entries(responses)) {
+                if (data.keywords.some(keyword => userMessage.includes(keyword))) {
+                    return data;
+                }
+            }
+            
+            // Default response with suggestions
+            return {
+                answer: "I'd be happy to help! I specialize in product strategy, conversion optimization, user experience, feature prioritization, market analysis, and growth metrics. Could you be more specific about what you'd like to explore?",
+                suggestions: "• How can I improve my product's conversion rate?<br>• What features should I prioritize next?<br>• How do I analyze my market competition?<br>• What metrics should I track for growth?"
+            };
         }
 
         function runMarketAnalysis() {
@@ -296,12 +391,34 @@
             document.getElementById('priorityResult').style.display = 'block';
         }
 
+        // Quick question function
+        function askQuestion(question) {
+            document.getElementById('userInput').value = question;
+            sendMessage();
+        }
+        
         // Allow Enter key to send messages
         document.getElementById('userInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
             }
         });
+        
+        // Add typing indicator
+        function showTypingIndicator() {
+            const messages = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.style.cssText = 'margin: 10px 0; padding: 10px; background: #f0f0f0; border-radius: 5px; font-style: italic; color: #666;';
+            typingDiv.innerHTML = '🤖 AI is thinking...';
+            messages.appendChild(typingDiv);
+            messages.scrollTop = messages.scrollHeight;
+            
+            setTimeout(() => {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+            }, 800);
+        }
     </script>
 </body>
 </html>
