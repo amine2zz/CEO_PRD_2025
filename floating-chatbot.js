@@ -2,8 +2,10 @@
 class FloatingChatbot {
     constructor() {
         this.isOpen = false;
+        this.chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
         this.createChatbot();
         this.setupEventListeners();
+        this.loadChatHistory();
     }
 
     createChatbot() {
@@ -229,6 +231,9 @@ class FloatingChatbot {
         const userMessage = input.value.trim();
         
         if (userMessage) {
+            this.chatHistory.push({type: 'user', content: userMessage});
+            this.saveChatHistory();
+            
             // Add user message
             messages.innerHTML += `
                 <div style="
@@ -251,6 +256,9 @@ class FloatingChatbot {
             setTimeout(() => {
                 this.removeTypingIndicator();
                 const response = this.getIntelligentResponse(userMessage.toLowerCase());
+                
+                this.chatHistory.push({type: 'ai', content: response.answer, suggestions: response.suggestions});
+                this.saveChatHistory();
                 
                 messages.innerHTML += `
                     <div style="
@@ -382,6 +390,50 @@ class FloatingChatbot {
             answer: `🤔 **Great Question!**\\n\\nI specialize in product strategy and can help you with:\\n\\n📊 Conversion optimization & A/B testing\\n🎯 User journey mapping & UX improvements\\n🚀 Feature prioritization & roadmap planning\\n📈 Growth strategies & metrics analysis\\n💰 Pricing strategies & revenue optimization\\n🤖 AI implementation & automation\\n🔍 Market research & competitive analysis\\n\\nWhat specific challenge would you like to tackle first?`,
             suggestions: "• How can I improve my product's conversion rate?<br>• What features should I prioritize next?<br>• How do I analyze my market competition?<br>• What metrics should I track for growth?"
         };
+    }
+    
+    saveChatHistory() {
+        localStorage.setItem('chatHistory', JSON.stringify(this.chatHistory));
+    }
+    
+    loadChatHistory() {
+        const messages = document.getElementById('chat-messages');
+        if (this.chatHistory.length > 0) {
+            messages.innerHTML = '';
+            this.chatHistory.forEach(msg => {
+                if (msg.type === 'user') {
+                    messages.innerHTML += `
+                        <div style="
+                            margin: 10px 0;
+                            padding: 10px;
+                            background: white;
+                            border-radius: 8px;
+                            text-align: right;
+                            border: 1px solid #e0e0e0;
+                            font-size: 14px;
+                        ">
+                            <strong>You:</strong> ${msg.content}
+                        </div>
+                    `;
+                } else {
+                    messages.innerHTML += `
+                        <div style="
+                            margin: 10px 0;
+                            padding: 15px;
+                            background: #e8f5e8;
+                            border-radius: 8px;
+                            border-left: 4px solid #4caf50;
+                            font-size: 14px;
+                            line-height: 1.4;
+                        ">
+                            <strong>🤖 AI Assistant:</strong><br><br>${msg.content.replace(/\\n/g, '<br>')}
+                            ${msg.suggestions ? `<div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.8); border-radius: 6px; border: 1px solid #ddd; font-size: 13px;"><strong>💡 Try asking:</strong><br>${msg.suggestions}</div>` : ''}
+                        </div>
+                    `;
+                }
+            });
+            messages.scrollTop = messages.scrollHeight;
+        }
     }
 }
 

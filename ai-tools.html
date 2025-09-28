@@ -29,7 +29,7 @@
     <section class="content-section">
         <div class="container">
             <div class="content-grid">
-                <div class="content-card">
+                <div class="content-card" style="min-height: 500px;">
                     <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop" alt="AI MVP Generator" />
                     <h3>🎯 AI MVP Generator</h3>
                     <p>Generate comprehensive MVP specifications based on your product vision and market analysis.</p>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
 
-                <div class="content-card">
+                <div class="content-card" style="min-height: 500px;">
                     <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop" alt="AI Wireframe Generator" />
                     <h3>🎨 AI Wireframe Generator</h3>
                     <p>Create intelligent wireframes and UI mockups based on best practices and user behavior data.</p>
@@ -90,37 +90,7 @@
                 </div>
             </div>
 
-            <div class="interactive-demo">
-                <h3>🤖 AI Strategy Assistant</h3>
-                <p>Get expert product strategy advice powered by comprehensive industry knowledge</p>
-                
-                <!-- Quick Action Buttons -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 15px 0;">
-                    <button onclick="askQuestion('How can I improve my conversion rate?')" class="demo-button" style="font-size: 0.9em; padding: 8px 12px;">💡 Improve Conversion</button>
-                    <button onclick="askQuestion('What features should I prioritize?')" class="demo-button" style="font-size: 0.9em; padding: 8px 12px;">🎯 Feature Priority</button>
-                    <button onclick="askQuestion('How do I analyze competition?')" class="demo-button" style="font-size: 0.9em; padding: 8px 12px;">🔍 Market Analysis</button>
-                    <button onclick="askQuestion('What pricing strategy should I use?')" class="demo-button" style="font-size: 0.9em; padding: 8px 12px;">💰 Pricing Strategy</button>
-                </div>
-                
-                <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; min-height: 350px; border: 1px solid #ddd;">
-                    <div id="chatMessages" style="height: 250px; overflow-y: auto; margin-bottom: 15px;">
-                        <div style="margin: 10px 0; padding: 15px; background: #e3f2fd; border-radius: 8px; border-left: 4px solid #2196f3;">
-                            <strong>🤖 AI Assistant:</strong> Hello! I'm your Product Strategy AI with expertise in conversion optimization, user experience, feature prioritization, market analysis, and growth strategies. I can provide specific, actionable advice based on industry best practices and data.
-                            <div style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.8); border-radius: 4px; font-size: 0.9em;">
-                                <strong>💡 Popular questions:</strong><br>
-                                • "How can I improve my signup conversion rate?"<br>
-                                • "What features should I build next?"<br>
-                                • "How do I price my SaaS product?"<br>
-                                • "What metrics should I track for growth?"
-                            </div>
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 10px;">
-                        <input type="text" id="userInput" placeholder="Ask me anything about product strategy, growth, pricing, features, or market analysis..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95em;">
-                        <button onclick="sendMessage()" class="demo-button" style="padding: 12px 20px;">Send</button>
-                    </div>
-                </div>
-            </div>
+
 
             <div class="content-grid">
                 <div class="content-card">
@@ -392,34 +362,7 @@
             document.getElementById('priorityResult').style.display = 'block';
         }
 
-        // Quick question function
-        function askQuestion(question) {
-            document.getElementById('userInput').value = question;
-            sendMessage();
-        }
-        
-        // Allow Enter key to send messages
-        document.getElementById('userInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-        
-        // Add typing indicator
-        function showTypingIndicator() {
-            const messages = document.getElementById('chatMessages');
-            const typingDiv = document.createElement('div');
-            typingDiv.id = 'typing-indicator';
-            typingDiv.style.cssText = 'margin: 10px 0; padding: 10px; background: #f0f0f0; border-radius: 5px; font-style: italic; color: #666;';
-            typingDiv.innerHTML = '🤖 AI is thinking...';
-            messages.appendChild(typingDiv);
-            messages.scrollTop = messages.scrollHeight;
-            
-            setTimeout(() => {
-                const indicator = document.getElementById('typing-indicator');
-                if (indicator) indicator.remove();
-            }, 800);
-        }
+
     </script>
 </body>
 </html>
