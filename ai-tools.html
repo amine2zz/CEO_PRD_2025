@@ -154,6 +154,7 @@
     </footer>
     
     <script src="enhanced-dynamics.js"></script>
+    <script src="floating-chatbot.js"></script>
 
     <script>
         function generateMVP() {
@@ -256,9 +257,9 @@
                     const response = getIntelligentResponse(userMessage);
                     
                     messages.innerHTML += `
-                        <div style="margin: 10px 0; padding: 10px; background: #e8f5e8; border-radius: 5px;">
-                            <strong>AI Assistant:</strong> ${response.answer}
-                            ${response.suggestions ? `<div style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.7); border-radius: 4px;"><strong>💡 Try asking:</strong><br>${response.suggestions}</div>` : ''}
+                        <div style="margin: 10px 0; padding: 15px; background: #e8f5e8; border-radius: 8px; border-left: 4px solid #4caf50;">
+                            <strong>🤖 AI Assistant:</strong><br><br>${response.answer.replace(/\n/g, '<br>')}
+                            ${response.suggestions ? `<div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.8); border-radius: 6px; border: 1px solid #ddd;"><strong>💡 Try asking:</strong><br>${response.suggestions}</div>` : ''}
                         </div>
                     `;
                     messages.scrollTop = messages.scrollHeight;
@@ -282,21 +283,21 @@
                 // Conversion & CTA
                 conversion: {
                     keywords: ['conversion', 'cta', 'sign up', 'signup', 'button', 'convert', 'rate'],
-                    answer: "For signup optimization: 1) Use action-oriented copy like 'Start Free Trial' instead of 'Sign Up', 2) Place CTAs above the fold and at natural break points, 3) Use contrasting colors (orange/green perform 32% better than blue), 4) Add urgency with 'Limited Time' or social proof with 'Join 10,000+ users', 5) Reduce form fields to essential only.",
+                    answer: `🎯 **Conversion Optimization Strategy**\n\n✅ **CTA Optimization:**\n• Use action-oriented copy: "Start Free Trial" vs "Sign Up"\n• Place CTAs above fold + at natural break points\n• Use contrasting colors (orange/green = 32% better than blue)\n\n📈 **Social Proof & Urgency:**\n• Add urgency: "Limited Time Offer"\n• Include social proof: "Join 10,000+ users"\n• Display real-time signups or usage stats\n\n📝 **Form Optimization:**\n• Reduce fields to essentials only\n• Use progressive disclosure\n• Add field validation with helpful errors\n\n💡 **Quick Win:** A/B test your main CTA button - even small changes can boost conversions by 20-40%!`,
                     suggestions: "• What colors work best for CTA buttons?<br>• How can I reduce signup friction?<br>• Should I use social proof on my landing page?"
                 },
                 
                 // User Journey & UX
                 userjourney: {
                     keywords: ['user journey', 'ux', 'experience', 'flow', 'onboarding', 'retention'],
-                    answer: "To optimize user journey: 1) Map current user flow and identify drop-off points, 2) Implement progressive onboarding (show value before asking for info), 3) Use behavioral triggers for contextual help, 4) A/B test different paths, 5) Focus on 'aha moments' - the point where users see value. Users who complete onboarding have 67% higher retention.",
+                    answer: `🗺️ **User Journey Optimization**\n\n🎯 **Key Journey Stages:**\n\n1️⃣ **Discovery**\n   • SEO content marketing\n   • Targeted ads & referrals\n   • Social media presence\n\n2️⃣ **Evaluation**\n   • High-converting landing pages\n   • Interactive demos & trials\n   • Case studies & testimonials\n\n3️⃣ **Onboarding**\n   • Progressive disclosure of features\n   • Quick wins within first session\n   • Guided tutorials & tooltips\n\n4️⃣ **Activation**\n   • Aha moments within 5 minutes\n   • Clear value demonstration\n   • Milestone celebrations\n\n5️⃣ **Retention**\n   • Email nurture sequences\n   • In-app guidance & tips\n   • Regular feature updates\n\n📊 **Key Stat:** Users who complete onboarding have 67% higher retention!`,
                     suggestions: "• How do I reduce onboarding drop-off?<br>• What metrics should I track for user experience?<br>• How can I improve user retention?"
                 },
                 
                 // Features & Prioritization
                 features: {
                     keywords: ['feature', 'prioritize', 'roadmap', 'development', 'mvp', 'backlog'],
-                    answer: "For feature prioritization, use the RICE framework: Reach (how many users), Impact (improvement level), Confidence (certainty %), Effort (development time). Focus on high-impact, low-effort features first. Consider: 1) User feedback frequency, 2) Revenue impact, 3) Strategic alignment, 4) Technical debt. Aim for 70% features, 20% improvements, 10% experiments.",
+                    answer: `🚀 **Feature Prioritization Framework**\n\n📊 **RICE Scoring Method:**\n• **Reach:** How many users affected?\n• **Impact:** How much will it improve their experience?\n• **Confidence:** How sure are you about the estimates?\n• **Effort:** How much work is required?\n\n**Formula:** (Reach × Impact × Confidence) ÷ Effort\n\n🎯 **High-Impact Feature Categories:**\n\n1️⃣ **Core Workflow Improvements** (40%)\n   • Streamline main user tasks\n   • Reduce clicks & friction\n\n2️⃣ **Integration Capabilities** (30%)\n   • Connect with popular tools\n   • API & webhook support\n\n3️⃣ **Mobile Optimization** (20%)\n   • Responsive design\n   • Native app features\n\n4️⃣ **Advanced Analytics** (10%)\n   • Custom dashboards\n   • Reporting & insights\n\n✅ **Best Practice:** 70% core features, 20% growth experiments, 10% technical debt`,
                     suggestions: "• How do I validate feature ideas?<br>• What's the best MVP approach?<br>• Should I build or buy this feature?"
                 },
                 
@@ -310,14 +311,14 @@
                 // Growth & Metrics
                 growth: {
                     keywords: ['growth', 'metrics', 'kpi', 'analytics', 'revenue', 'arr', 'mrr'],
-                    answer: "Key growth metrics to track: 1) Acquisition: CAC, conversion rate, traffic sources, 2) Activation: onboarding completion, time-to-value, 3) Retention: churn rate, DAU/MAU, cohort analysis, 4) Revenue: LTV, MRR/ARR growth, expansion revenue, 5) Referral: NPS, viral coefficient. Focus on leading indicators, not just lagging ones.",
+                    answer: `📈 **Growth Metrics Framework**\n\n🎯 **North Star Metric:**\nChoose ONE metric that best represents user value\n\n📊 **AARRR Funnel:**\n\n🔸 **Acquisition:** How do users find you?\n   • Traffic sources, conversion rates\n   • Cost per acquisition (CPA)\n\n🔸 **Activation:** Do they experience value?\n   • Time to first value < 24 hours\n   • Onboarding completion rates\n\n🔸 **Retention:** Do they come back?\n   • Day 1, 7, 30 retention rates\n   • Cohort analysis\n\n🔸 **Revenue:** Do they pay?\n   • MRR growth > 10% monthly\n   • LTV:CAC ratio > 3:1\n\n🔸 **Referral:** Do they tell others?\n   • NPS score > 50\n   • Viral coefficient\n\n⚡ **SaaS Benchmarks:**\n• Monthly churn < 5%\n• Annual churn < 10%\n• Gross revenue retention > 90%`,
                     suggestions: "• What's a good conversion rate for my industry?<br>• How do I calculate customer lifetime value?<br>• Which metrics matter most for SaaS?"
                 },
                 
                 // Pricing Strategy
                 pricing: {
                     keywords: ['pricing', 'price', 'cost', 'subscription', 'freemium', 'plan'],
-                    answer: "Pricing strategy recommendations: 1) Research competitor pricing and position accordingly, 2) Consider value-based pricing over cost-plus, 3) Test freemium vs. free trial (freemium works for viral products, trials for complex ones), 4) Use psychological pricing ($29 vs $30), 5) Offer 3 tiers with middle option as anchor. SaaS average: 10-20% annual discount, 15-25% churn acceptable.",
+                    answer: `💰 **Pricing Strategy Framework**\n\n🎯 **Pricing Models:**\n\n1️⃣ **Value-Based Pricing**\n   • Align with customer ROI\n   • Price based on outcomes delivered\n   • Premium for high-value segments\n\n2️⃣ **Freemium Strategy**\n   • Free tier for viral growth\n   • Clear upgrade triggers\n   • Limit usage, not features\n\n3️⃣ **Tiered Pricing (Good-Better-Best)**\n   • 3-4 clear tiers maximum\n   • Most customers choose middle tier\n   • Enterprise tier with custom pricing\n\n💡 **Optimization Tips:**\n\n✅ **Annual Discounts:** 15-20% off\n✅ **A/B Testing:** Test pricing regularly\n✅ **Price Increases:** 10-15% annually\n✅ **Grandfathering:** Protect existing customers\n\n📊 **SaaS Benchmarks:** 15-25% churn acceptable, 10-20% annual discount standard`,
                     suggestions: "• Should I offer a free plan?<br>• How many pricing tiers should I have?<br>• When should I raise prices?"
                 },
                 
@@ -345,7 +346,7 @@
             
             // Default response with suggestions
             return {
-                answer: "I'd be happy to help! I specialize in product strategy, conversion optimization, user experience, feature prioritization, market analysis, and growth metrics. Could you be more specific about what you'd like to explore?",
+                answer: `🤔 **Great Question!**\n\nI specialize in product strategy and can help you with:\n\n📊 Conversion optimization & A/B testing\n🎯 User journey mapping & UX improvements\n🚀 Feature prioritization & roadmap planning\n📈 Growth strategies & metrics analysis\n💰 Pricing strategies & revenue optimization\n🤖 AI implementation & automation\n🔍 Market research & competitive analysis\n\nWhat specific challenge would you like to tackle first?`,
                 suggestions: "• How can I improve my product's conversion rate?<br>• What features should I prioritize next?<br>• How do I analyze my market competition?<br>• What metrics should I track for growth?"
             };
         }
